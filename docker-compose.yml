@@ -1,0 +1,17 @@
+networks:
+  demo-net:
+    driver: bridge
+
+services:
+
+  sftp-server:
+    image: atmoz/sftp:alpine
+    container_name: sftp-server
+    environment:
+      SFTP_USERS: "demouser:demopass:::data"
+    volumes:
+      - ./data:/home/demouser/data
+    ports:
+      - 2222:22
+    networks:
+      - demo-net
